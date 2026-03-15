@@ -3793,7 +3793,7 @@ ldnmp_web_status() {
 			2)
 				send_stats "克隆站點域名"
 				read -e -p "請輸入舊網域名稱:" oddyuming
-				read -e -p "請輸入新網域名稱:" yuming
+				read -e -p "請輸入新網域:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -3834,7 +3834,7 @@ ldnmp_web_status() {
 				send_stats "建立關聯站點"
 				echo -e "為現有的站點再關聯一個新網域用於訪問"
 				read -e -p "請輸入現有的網域名稱:" oddyuming
-				read -e -p "請輸入新網域名稱:" yuming
+				read -e -p "請輸入新網域:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -5916,7 +5916,7 @@ break_end
 
 shell_bianse() {
   root_use
-  send_stats "命令列美化工具"
+  send_stats "命令行美化工具"
   while true; do
 	clear
 	echo "命令列美化工具"
@@ -5976,7 +5976,7 @@ shell_bianse() {
 
 linux_trash() {
   root_use
-  send_stats "系統回收站"
+  send_stats "系统回收站"
 
   local bashrc_profile="/root/.bashrc"
   local TRASH_DIR="$HOME/.local/share/Trash/files"
@@ -5991,7 +5991,7 @@ linux_trash() {
 	fi
 
 	clear
-	echo -e "目前回收站${trash_status}"
+	echo -e "当前回收站 ${trash_status}"
 	echo -e "啟用後rm刪除的檔案先進入回收站，防止誤刪重要檔案！"
 	echo "------------------------------------------------"
 	ls -l --color=auto "$TRASH_DIR" 2>/dev/null || echo "回收站為空"
@@ -7290,7 +7290,7 @@ docker_ssh_migration() {
 		local RESTORE_SCRIPT="${BACKUP_DIR}/docker_restore.sh"
 		echo "#!/bin/bash" > "$RESTORE_SCRIPT"
 		echo "set -e" >> "$RESTORE_SCRIPT"
-		echo "# 自動產生的還原腳本" >> "$RESTORE_SCRIPT"
+		echo "# 自动生成的还原脚本" >> "$RESTORE_SCRIPT"
 
 		# 記錄已打包過的 Compose 專案路徑，避免重複打包
 		declare -A PACKED_COMPOSE_PATHS=()
@@ -9327,7 +9327,7 @@ while true; do
 	  echo -e "${gl_kjlan}97.  ${color97}WireGuard組網(服務端)${gl_kjlan}98.  ${color98}WireGuard組網(客戶端)"
 	  echo -e "${gl_kjlan}99.  ${color99}DSM群暉虛擬機${gl_kjlan}100. ${color100}Syncthing點對點檔案同步工具"
 	  echo -e "${gl_kjlan}-------------------------"
-	  echo -e "${gl_kjlan}101. ${color101}AI影片生成工具${gl_kjlan}102. ${color102}VoceChat多人線上聊天系統"
+	  echo -e "${gl_kjlan}101. ${color101}AI影片產生工具${gl_kjlan}102. ${color102}VoceChat多人線上聊天系統"
 	  echo -e "${gl_kjlan}103. ${color103}Umami網站統計工具${gl_kjlan}104. ${color104}Stream四層代理轉送工具"
 	  echo -e "${gl_kjlan}105. ${color105}思源筆記${gl_kjlan}106. ${color106}Drawnix開源白板工具"
 	  echo -e "${gl_kjlan}107. ${color107}PanSou網盤搜尋${gl_kjlan}108. ${color108}LangBot聊天機器人"
@@ -11107,7 +11107,7 @@ while true; do
 
 		}
 
-		local docker_describe="免費開源機器翻譯 API，完全自託管，它的翻譯引擎由開源Argos Translate庫提供支援。"
+		local docker_describe="免费开源机器翻译 API，完全自托管，它的翻译引擎由开源Argos Translate库提供支持。"
 		local docker_url="官網介紹: https://github.com/LibreTranslate/LibreTranslate"
 		local docker_use=""
 		local docker_passwd=""
@@ -11270,7 +11270,7 @@ while true; do
 		}
 
 		local docker_describe="開源免費的 SSL 憑證自動化管理平台"
-		local docker_url="官網介紹: https://allinssl.com"
+		local docker_url="官网介绍: https://allinssl.com"
 		local docker_use="echo \"安全入口: /allinssl\""
 		local docker_passwd="echo \"使用者名稱: allinssl 密碼: allinssldocker\""
 		local app_size="1"
@@ -11581,7 +11581,7 @@ while true; do
 		local app_id="78"
 		local app_name="PandaWiki"
 		local app_text="PandaWiki是一款以AI大模型驅動的開源智慧文件管理系統，強烈建議不要自訂連接埠部署。"
-		local app_url="官方介紹: https://github.com/chaitin/PandaWiki"
+		local app_url="官方介绍: https://github.com/chaitin/PandaWiki"
 		local docker_name="panda-wiki-nginx"
 		local docker_port="2443"
 		local app_size="2"
@@ -11919,7 +11919,7 @@ while true; do
 		}
 
 		local docker_describe="是一款開源媒體伺服器軟體"
-		local docker_url="官網介紹: https://jellyfin.org/"
+		local docker_url="官网介绍: https://jellyfin.org/"
 		local docker_use=""
 		local docker_passwd=""
 		local app_size="1"
@@ -12576,7 +12576,7 @@ while true; do
 
 	  101|moneyprinterturbo)
 		local app_id="101"
-		local app_name="AI影片生成工具"
+		local app_name="AI影片產生工具"
 		local app_text="MoneyPrinterTurbo是一款使用AI大模型合成高清短影片的工具"
 		local app_url="官方網站: https://github.com/harry0703/MoneyPrinterTurbo"
 		local docker_name="moneyprinterturbo"
@@ -13552,7 +13552,7 @@ EOF
 						send_stats "SSH連接埠已修改"
 						new_ssh_port
 					elif [[ $new_port -eq 0 ]]; then
-						send_stats "退出SSH埠修改"
+						send_stats "退出SSH連接埠修改"
 						break
 					else
 						echo "連接埠號碼無效，請輸入1到65535之間的數字。"

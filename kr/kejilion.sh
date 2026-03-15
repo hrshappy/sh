@@ -1259,7 +1259,7 @@ check_swap() {
 
 local swap_total=$(free -m | awk 'NR==3{print $2}')
 
-# 가상 메모리를 만들어야 하는지 확인
+# 가상 메모리를 생성해야 하는지 결정
 [ "$swap_total" -gt 0 ] || add_swap 1024
 
 
@@ -3412,7 +3412,7 @@ ldnmp_Proxy() {
 	check_ip_and_get_access_port "$yuming"
 
 	if [ -z "$reverseproxy" ]; then
-		read -e -p "안티 세대 IP를 입력하십시오(기본값은 로컬 IP 127.0.0.1로 설정하려면 Enter를 누르십시오)." reverseproxy
+		read -e -p "세대 방지 IP를 입력하십시오(기본값은 로컬 IP 127.0.0.1로 설정하려면 Enter를 누르십시오)." reverseproxy
 		reverseproxy=${reverseproxy:-127.0.0.1}
 	fi
 
@@ -4318,7 +4318,7 @@ frps_panel() {
 
 			8)
 				send_stats "IP 접근 차단"
-				echo "역방향 도메인 이름 접근이 있는 경우, 이 기능을 사용하면 IP+포트 접근을 차단할 수 있어 더욱 안전합니다."
+				echo "역방향 도메인 이름 접근을 가지고 있는 경우, 이 기능을 사용하면 IP+포트 접근을 차단할 수 있어 더욱 안전합니다."
 				read -e -p "차단할 포트를 입력하세요:" frps_port
 				block_host_port "$frps_port" "$ipv4_address"
 				;;
@@ -5486,7 +5486,7 @@ clamav_freshclam() {
 
 clamav_scan() {
 	if [ $# -eq 0 ]; then
-		echo "스캔할 디렉터리를 지정하세요."
+		echo "스캔할 디렉터리를 지정하십시오."
 		return
 	fi
 
@@ -6513,7 +6513,7 @@ disk_manager() {
 	send_stats "하드디스크 관리 기능"
 	while true; do
 		clear
-		echo "하드 디스크 파티션 관리"
+		echo "하드 드라이브 파티션 관리"
 		echo -e "${gl_huang}이 기능은 내부 테스트 중이므로 프로덕션 환경에서는 사용하면 안 됩니다.${gl_bai}"
 		echo "------------------------"
 		list_partitions
@@ -6727,7 +6727,7 @@ run_task() {
 }
 
 
-# 예약된 작업 만들기
+# 创建定时任务
 schedule_task() {
 	send_stats "동기화 예약 작업 추가"
 
@@ -6739,8 +6739,8 @@ schedule_task() {
 
 	echo "예약된 실행 간격을 선택하십시오."
 	echo "1) 매 시간마다 한 번씩 실행"
-	echo "2) 하루에 한 번 실행"
-	echo "3) 일주일에 한 번 실행"
+	echo "2) 每天执行一次"
+	echo "3) 每周执行一次"
 	read -e -p "옵션을 입력하세요(1/2/3):" interval
 
 	local random_minute=$(shuf -i 0-59 -n 1)  # 生成 0-59 之间的随机分钟数
@@ -7543,7 +7543,7 @@ docker_ssh_migration() {
 			echo -e "1. 도커 프로젝트 백업"
 			echo -e "2. 도커 프로젝트 마이그레이션"
 			echo -e "3. 도커 프로젝트 복원"
-			echo -e "4. Docker 프로젝트의 백업 파일을 삭제합니다."
+			echo -e "4. docker 프로젝트 백업 파일 삭제"
 			echo "------------------------"
 			echo -e "0. 이전 메뉴로 돌아가기"
 			echo "------------------------"
@@ -7697,7 +7697,7 @@ linux_docker() {
 					  3)
 						  send_stats "네트워크에 가입하세요"
 						  read -e -p "종료 네트워크 이름:" dockernetwork
-						  read -e -p "해당 컨테이너는 네트워크를 종료합니다(여러 컨테이너 이름을 공백으로 구분하세요)." dockernames
+						  read -e -p "이러한 컨테이너는 네트워크를 종료합니다(여러 컨테이너 이름을 공백으로 구분하세요)." dockernames
 
 						  for dockername in $dockernames; do
 							  docker network disconnect $dockernetwork $dockername
@@ -9269,7 +9269,7 @@ while true; do
 
 	  echo -e "${gl_kjlan}1.   ${color1}파고다 패널 공식 버전${gl_kjlan}2.   ${color2}aaPanel Pagoda 국제 버전"
 	  echo -e "${gl_kjlan}3.   ${color3}1패널 차세대 관리 패널${gl_kjlan}4.   ${color4}NginxProxyManager 시각화 패널"
-	  echo -e "${gl_kjlan}5.   ${color5}OpenList 다중 저장소 파일 목록 프로그램${gl_kjlan}6.   ${color6}Ubuntu 원격 데스크톱 웹 버전"
+	  echo -e "${gl_kjlan}5.   ${color5}OpenList 다중 저장소 파일 목록 프로그램${gl_kjlan}6.   ${color6}Ubuntu 원격 데스크톱 웹 에디션"
 	  echo -e "${gl_kjlan}7.   ${color7}나타 프로브 VPS 모니터링 패널${gl_kjlan}8.   ${color8}QB 오프라인 BT 자기 다운로드 패널"
 	  echo -e "${gl_kjlan}9.   ${color9}Poste.io 메일 서버 프로그램${gl_kjlan}10.  ${color10}RocketChat 다자간 온라인 채팅 시스템"
 	  echo -e "${gl_kjlan}-------------------------"
@@ -9545,7 +9545,7 @@ while true; do
 			check_docker_app
 			check_docker_image_update $docker_name
 			clear
-			echo -e "네자 모니터링$check_docker $update_status"
+			echo -e "나타 모니터링$check_docker $update_status"
 			echo "오픈 소스, 가볍고 사용하기 쉬운 서버 모니터링 및 운영 및 유지 관리 도구"
 			echo "공식 웹사이트 구축 문서: https://nezha.wiki/guide/dashboard.html"
 			if docker ps -a --format '{{.Names}}' 2>/dev/null | grep -q "$docker_name"; then
@@ -9625,7 +9625,7 @@ while true; do
 			check_docker_image_update $docker_name
 
 			clear
-			echo -e "우정$check_docker $update_status"
+			echo -e "우편 서비스$check_docker $update_status"
 			echo "poste.io는 오픈 소스 메일 서버 솔루션입니다."
 			echo "영상 소개: https://www.bilibili.com/video/BV1wv421C71t?t=0.1"
 
@@ -10364,7 +10364,7 @@ while true; do
 
 
 		local docker_describe="포토프리즘은 매우 강력한 개인 사진 앨범 시스템입니다."
-		local docker_url="공식 홈페이지 소개: https://www.photoprism.app/"
+		local docker_url="공식 홈페이지 소개 : https://www.photoprism.app/"
 		local docker_use="echo \"계정: admin 비밀번호:$rootpasswd\""
 		local docker_passwd=""
 		local app_size="1"
@@ -12925,7 +12925,7 @@ discourse,yunsou,ahhhhfs,nsgame,gying" \
 		local app_id="112"
 		local docker_name="lucky"
 		local docker_img="gdy666/lucky:v2"
-		# Lucky는 호스트 네트워크 모드를 사용하므로 여기서 포트는 기록/설명 참조용으로만 사용되며 실제로는 애플리케이션 자체에 의해 제어됩니다(기본값 16601).
+		# Lucky는 호스트 네트워크 모드를 사용하므로 여기의 포트는 기록/설명 참조용으로만 사용되며 실제로는 애플리케이션 자체에 의해 제어됩니다(기본값 16601).
 		local docker_port=8112
 
 		docker_rum() {
@@ -13027,7 +13027,7 @@ discourse,yunsou,ahhhhfs,nsgame,gying" \
 	  r)
 	  	root_use
 	  	send_stats "모든 앱 복원"
-	  	echo "사용 가능한 앱 백업"
+	  	echo "사용 가능한 애플리케이션 백업"
 	  	echo "-------------------------"
 	  	ls -lt /app*.gz | awk '{print $NF}'
 	  	echo ""
@@ -13099,7 +13099,7 @@ linux_work() {
 	  echo -e "${gl_kjlan}2.   ${gl_bai}작업 영역 2"
 	  echo -e "${gl_kjlan}3.   ${gl_bai}작업 영역 3"
 	  echo -e "${gl_kjlan}4.   ${gl_bai}작업 영역 4"
-	  echo -e "${gl_kjlan}5.   ${gl_bai}작업 영역 5"
+	  echo -e "${gl_kjlan}5.   ${gl_bai}작업 공간 5번"
 	  echo -e "${gl_kjlan}6.   ${gl_bai}작업 영역 6"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}작업 영역 7"
 	  echo -e "${gl_kjlan}8.   ${gl_bai}작업 영역 8"
@@ -13376,7 +13376,7 @@ linux_Settings() {
 	  echo -e "${gl_kjlan}3.   ${gl_bai}ROOT 비밀번호 로그인 모드${gl_kjlan}4.   ${gl_bai}지정된 버전의 Python 설치"
 	  echo -e "${gl_kjlan}5.   ${gl_bai}모든 포트 열기${gl_kjlan}6.   ${gl_bai}SSH 연결 포트 수정"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}DNS 주소 최적화${gl_kjlan}8.   ${gl_bai}한 번의 클릭으로 시스템을 다시 설치${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}9.   ${gl_bai}ROOT 계정을 비활성화하고 새 계정을 만듭니다.${gl_kjlan}10.  ${gl_bai}우선순위 ipv4/ipv6 전환"
+	  echo -e "${gl_kjlan}9.   ${gl_bai}ROOT 계정을 비활성화하고 새 계정을 만듭니다.${gl_kjlan}10.  ${gl_bai}우선 순위 ipv4/ipv6 전환"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}11.  ${gl_bai}항만점유현황 확인${gl_kjlan}12.  ${gl_bai}가상 메모리 크기 수정"
 	  echo -e "${gl_kjlan}13.  ${gl_bai}사용자 관리${gl_kjlan}14.  ${gl_bai}사용자/비밀번호 생성기"
@@ -13843,7 +13843,7 @@ EOF
 				# 현재 시스템 시간대 가져오기
 				local timezone=$(current_timezone)
 
-				# 현재 시스템 시간 가져오기
+				# 현재 시스템 시간을 가져옵니다
 				local current_time=$(date +"%Y-%m-%d %H:%M:%S")
 
 				# 시간대 및 시간 표시
@@ -13863,7 +13863,7 @@ EOF
 				echo "유럽"
 				echo "11. 영국 런던 시간 12. 프랑스 파리 시간"
 				echo "13. 독일 베를린 시간 14. 러시아 모스크바 시간"
-				echo "15. 네덜란드 유트라흐트 시간 16. 스페인 마드리드 시간"
+				echo "15. 네덜란드 위트라흐트 시간 16. 스페인 마드리드 시간"
 				echo "------------------------"
 				echo "미국"
 				echo "21. 미국 서부 시간 22. 미국 동부 시간"
@@ -13931,7 +13931,7 @@ EOF
 					  echo "$new_hostname" > /etc/hostname
 					  hostname "$new_hostname"
 				  else
-					  # Debian, Ubuntu, CentOS 등과 같은 다른 시스템
+					  # Debian, Ubuntu, CentOS 등과 같은 기타 시스템
 					  hostnamectl set-hostname "$new_hostname"
 					  sed -i "s/$current_hostname/$new_hostname/g" /etc/hostname
 					  systemctl restart systemd-hostnamed
@@ -15212,7 +15212,7 @@ echo "도커 컨테이너 관리 k 도커 ps |k 도커 컨테이너"
 echo "도커 이미지 관리 k docker img |k 도커 이미지"
 echo "LDNMP 사이트 관리 k web"
 echo "LDNMP 캐시 정리 k 웹 캐시"
-echo "WordPress k wp 설치 | k 워드프레스 | kwp xxx.com"
+echo "WordPress k wp 설치 | k 워드프레스 | k wp xxx.com"
 echo "역방향 프록시 설치 k fd |k rp |k 역방향 프록시 |k fd xxx.com"
 echo "로드 밸런싱 설치 k loadbalance |k 로드 밸런싱"
 echo "L4 로드 밸런싱 설치 k 스트림 |k L4 로드 밸런싱"
