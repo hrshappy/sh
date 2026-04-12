@@ -59,7 +59,7 @@ CheckFirstRun_true() {
 
 # 이 기능은 함수에 묻혀있는 정보를 수집하고 사용자가 사용하는 현재 스크립트 버전 번호, 사용 시간, 시스템 버전, CPU 아키텍처, 시스템 국가 및 기능 이름을 기록합니다. 민감한 정보는 포함되어 있지 않으니 걱정하지 마세요! 저를 믿어주세요!
 # 이 기능은 왜 설계되었나요? 그 목적은 사용자가 사용하고 싶어하는 기능을 더 잘 이해하고, 기능을 더욱 최적화하고 사용자 요구에 맞는 더 많은 기능을 출시하는 것입니다.
-# send_stats 함수 호출 위치에 대한 전문을 검색할 수 있습니다. 투명하고 오픈 소스입니다. 우려되는 사항이 있는 경우 이용을 거부하실 수 있습니다.
+# send_stats 함수 호출 위치에 대한 전문을 검색할 수 있습니다. 투명하고 오픈 소스입니다. 불편하신 점이 있으시면 이용을 거부하실 수 있습니다.
 
 
 
@@ -1197,7 +1197,7 @@ iptables_panel() {
 				  ;;
 
 			  17)
-				  read -e -p "삭제된 국가 코드를 입력하십시오(여러 국가 코드는 CN US JP와 같이 공백으로 구분될 수 있음)." country_code
+				  read -e -p "지워진 국가 코드를 입력하십시오(여러 국가 코드는 CN US JP와 같이 공백으로 구분될 수 있음)." country_code
 				  manage_country_rules unblock $country_code
 				  send_stats "명확한 국가$country_codeIP"
 				  ;;
@@ -1545,7 +1545,7 @@ certs_status() {
 		echo -e "${gl_hong}알아채다:${gl_bai}인증서 신청이 실패했습니다. 다음 가능한 이유를 확인하고 다시 시도하십시오."
 		echo -e "1. 도메인 이름이 잘못 입력되었습니다. ➠ 도메인 이름이 올바르게 입력되었는지 확인하세요."
 		echo -e "2. DNS 확인 문제 ➠ 도메인 이름이 서버 IP로 올바르게 확인되었는지 확인"
-		echo -e "3. 네트워크 구성 문제 ➠ Cloudflare Warp 등 가상 네트워크를 사용하는 경우 일시적으로 종료하세요."
+		echo -e "3. 네트워크 구성 문제 ➠ Cloudflare Warp 등 가상 네트워크를 사용하는 경우 일시적으로 종료하시기 바랍니다"
 		echo -e "4. 방화벽 제한사항 ➠ 포트 80/443이 열려 있는지 확인하고 접근이 가능한지 확인하세요."
 		echo -e "5. 신청 횟수가 한도를 초과했습니다. ➠ Let's Encrypt에는 주간 한도(5회/도메인 이름/주)가 있습니다."
 		echo -e "6. 국내 등록 제한 ➠ 중국 ​​본토 환경의 경우 도메인 이름 등록 여부를 확인하시기 바랍니다."
@@ -2248,7 +2248,7 @@ web_security() {
 
 				  22)
 					  send_stats "고부하로 5초 쉴드 가능"
-					  echo -e "${gl_huang}웹사이트는 5분마다 자동으로 감지합니다. 높은 부하를 감지하면 자동으로 쉴드가 열리고, 낮은 부하가 감지되면 자동으로 5초 동안 쉴드가 닫힙니다.${gl_bai}"
+					  echo -e "${gl_huang}웹사이트는 5분마다 자동으로 감지합니다. 고부하를 감지하면 자동으로 실드를 열고, 저부하를 감지하면 자동으로 5초 동안 실드를 닫습니다.${gl_bai}"
 					  echo "--------------"
 					  echo "CF 매개변수 가져오기:"
 					  echo -e "cf 백엔드 오른쪽 상단에 있는 내 프로필로 이동하여 왼쪽에 있는 API 토큰을 선택하고${gl_huang}Global API Key${gl_bai}"
@@ -2514,7 +2514,7 @@ check_docker_app() {
 # if docker ps -a --format '{{.Names}}' 2>/dev/null | grep -q "$docker_name"; then
 # check_docker="${gl_lv}가 ${gl_bai}를 설치했습니다."
 # else
-# check_docker="${gl_hui}이(가) ${gl_bai}" 설치되지 않았습니다.
+# check_docker="${gl_hui}가 ${gl_bai}" 설치되지 않았습니다.
 # fi
 
 # }
@@ -2895,7 +2895,7 @@ while true; do
 		1)
 			setup_docker_dir
 			check_disk_space $app_size /home/docker
-			read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
+			read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter 키를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
 			local app_port=${app_port:-${docker_port}}
 			local docker_port=$app_port
 
@@ -3008,7 +3008,7 @@ docker_app_plus() {
 			1)
 				setup_docker_dir
 				check_disk_space $app_size /home/docker
-				read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
+				read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter 키를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
 				local app_port=${app_port:-${docker_port}}
 				local docker_port=$app_port
 				install jq
@@ -3412,7 +3412,7 @@ ldnmp_Proxy() {
 	check_ip_and_get_access_port "$yuming"
 
 	if [ -z "$reverseproxy" ]; then
-		read -e -p "세대 방지 IP를 입력하십시오(기본값은 로컬 IP 127.0.0.1로 설정하려면 Enter를 누르십시오)." reverseproxy
+		read -e -p "안티 세대 IP를 입력하십시오(기본값은 로컬 IP 127.0.0.1로 설정하려면 Enter를 누르십시오)." reverseproxy
 		reverseproxy=${reverseproxy:-127.0.0.1}
 	fi
 
@@ -4009,7 +4009,7 @@ EOF
 
 	donlond_frp frps
 
-	# 생성된 정보 출력
+	# 생성된 정보를 출력
 	ip_address
 	echo "------------------------"
 	echo "클라이언트 배포에 필요한 매개변수"
@@ -4071,7 +4071,7 @@ remote_port = ${remote_port}
 
 EOF
 
-	# 생성된 정보 출력
+	# 생성된 정보를 출력
 	echo "제공하다$service_namefrpc.toml에 성공적으로 추가되었습니다."
 
 	docker restart frpc
@@ -5279,7 +5279,7 @@ bbrv3() {
 						apt update -y
 						apt install -y linux-xanmod-x64v$version
 
-						echo "XanMod 커널이 업데이트되었습니다. 재시작 후 적용"
+						echo "XanMod 커널이 업데이트되었습니다. 다시 시작한 후 적용"
 						rm -f /etc/apt/sources.list.d/xanmod-release.list
 						rm -f check_x86-64_psabi.sh*
 
@@ -5289,7 +5289,7 @@ bbrv3() {
 					  2)
 						apt purge -y 'linux-*xanmod1*'
 						update-grub
-						echo "XanMod 커널이 제거되었습니다. 재시작 후 적용"
+						echo "XanMod 커널이 제거되었습니다. 다시 시작한 후 적용"
 						server_reboot
 						  ;;
 
@@ -5343,7 +5343,7 @@ bbrv3() {
 
 			bbr_on
 
-			echo "XanMod 커널이 설치되고 BBR3이 성공적으로 활성화되었습니다. 재시작 후 적용"
+			echo "XanMod 커널이 설치되고 BBR3이 성공적으로 활성화되었습니다. 다시 시작한 후 적용"
 			rm -f /etc/apt/sources.list.d/xanmod-release.list
 			rm -f check_x86-64_psabi.sh*
 			server_reboot
@@ -5432,7 +5432,7 @@ elrepo() {
 					  2)
 						dnf remove -y elrepo-release
 						rpm -qa | grep elrepo | grep kernel | xargs rpm -e --nodeps
-						echo "elrepo 커널이 제거되었습니다. 재시작 후 적용"
+						echo "elrepo 커널이 제거되었습니다. 다시 시작한 후 적용"
 						send_stats "Red Hat 커널 제거"
 						server_reboot
 
@@ -5992,7 +5992,7 @@ linux_trash() {
 
 	clear
 	echo -e "현재 휴지통${trash_status}"
-	echo -e "활성화한 후에는 중요한 파일이 실수로 삭제되는 것을 방지하기 위해 rm으로 삭제된 파일이 먼저 휴지통에 들어갑니다!"
+	echo -e "활성화한 후에는 중요한 파일이 실수로 삭제되는 것을 방지하기 위해 rm으로 삭제된 파일이 먼저 휴지통에 저장됩니다!"
 	echo "------------------------------------------------"
 	ls -l --color=auto "$TRASH_DIR" 2>/dev/null || echo "휴지통이 비어 있습니다."
 	echo "------------------------"
@@ -6231,7 +6231,7 @@ add_connection() {
 			echo "주요 내용을 붙여넣으세요(붙인 후 Enter를 두 번 누르세요)."
 			local password_or_key=""
 			while IFS= read -r line; do
-				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함된 경우 입력을 종료합니다.
+				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함되어 있으면 입력을 종료합니다.
 				if [[ -z "$line" && "$password_or_key" == *"-----BEGIN"* ]]; then
 					break
 				fi
@@ -6513,7 +6513,7 @@ disk_manager() {
 	send_stats "하드디스크 관리 기능"
 	while true; do
 		clear
-		echo "하드 디스크 파티션 관리"
+		echo "하드 드라이브 파티션 관리"
 		echo -e "${gl_huang}이 기능은 내부 테스트 중이므로 프로덕션 환경에서는 사용하면 안 됩니다.${gl_bai}"
 		echo "------------------------"
 		list_partitions
@@ -6579,7 +6579,7 @@ add_task() {
 			echo "주요 내용을 붙여넣으세요(붙인 후 Enter를 두 번 누르세요)."
 			local password_or_key=""
 			while IFS= read -r line; do
-				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함된 경우 입력을 종료합니다.
+				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함되어 있으면 입력을 종료합니다.
 				if [[ -z "$line" && "$password_or_key" == *"-----BEGIN"* ]]; then
 					break
 				fi
@@ -9329,7 +9329,7 @@ while true; do
 	  echo -e "${gl_kjlan}-------------------------"
 	  echo -e "${gl_kjlan}101. ${color101}AI 영상 생성 도구${gl_kjlan}102. ${color102}VoceChat 다자간 온라인 채팅 시스템"
 	  echo -e "${gl_kjlan}103. ${color103}Umami 웹사이트 통계 도구${gl_kjlan}104. ${color104}스트림 4계층 프록시 전달 도구"
-	  echo -e "${gl_kjlan}105. ${color105}쓰위안 노트${gl_kjlan}106. ${color106}Drawix 오픈 소스 화이트보드 도구"
+	  echo -e "${gl_kjlan}105. ${color105}쓰위안 노트${gl_kjlan}106. ${color106}Drawnix 오픈 소스 화이트보드 도구"
 	  echo -e "${gl_kjlan}107. ${color107}PanSou 네트워크 디스크 검색${gl_kjlan}108. ${color108}LangBot 챗봇"
 	  echo -e "${gl_kjlan}109. ${color109}ZFile 온라인 네트워크 디스크${gl_kjlan}110. ${color110}Karakeep 북마크 관리"
 	  echo -e "${gl_kjlan}-------------------------"
@@ -9536,7 +9536,7 @@ while true; do
 		  ;;
 	  7|nezha)
 		clear
-		send_stats "나타 빌드"
+		send_stats "네자 빌드"
 
 		local app_id="7"
 		local docker_name="nezha-dashboard"
@@ -9545,7 +9545,7 @@ while true; do
 			check_docker_app
 			check_docker_image_update $docker_name
 			clear
-			echo -e "나타 모니터링$check_docker $update_status"
+			echo -e "네자 모니터링$check_docker $update_status"
 			echo "오픈 소스, 가볍고 사용하기 쉬운 서버 모니터링 및 운영 및 유지 관리 도구"
 			echo "공식 웹사이트 구축 문서: https://nezha.wiki/guide/dashboard.html"
 			if docker ps -a --format '{{.Names}}' 2>/dev/null | grep -q "$docker_name"; then
@@ -10364,7 +10364,7 @@ while true; do
 
 
 		local docker_describe="포토프리즘은 매우 강력한 개인 사진 앨범 시스템입니다."
-		local docker_url="공식 홈페이지 소개: https://www.photoprism.app/"
+		local docker_url="공식 홈페이지 소개 : https://www.photoprism.app/"
 		local docker_use="echo \"계정: admin 비밀번호:$rootpasswd\""
 		local docker_passwd=""
 		local app_size="1"
@@ -10391,7 +10391,7 @@ while true; do
 				 frooodle/s-pdf:latest
 		}
 
-		local docker_describe="이는 분할 병합, 변환, 재구성, 이미지 추가, 회전, 압축 등과 같은 PDF 파일에 대한 다양한 작업을 수행할 수 있는 Docker를 사용하여 로컬로 호스팅되는 강력한 웹 기반 PDF 조작 도구입니다."
+		local docker_describe="이는 분할 병합, 변환, 재구성, 이미지 추가, 회전, 압축 등과 같은 PDF 파일에 대한 다양한 작업을 수행할 수 있는 docker를 사용하는 강력한 로컬 호스팅 웹 기반 PDF 조작 도구입니다."
 		local docker_url="공식 웹사이트 소개:${gh_proxy}github.com/Stirling-Tools/Stirling-PDF"
 		local docker_use=""
 		local docker_passwd=""
@@ -12577,7 +12577,7 @@ while true; do
 	  101|moneyprinterturbo)
 		local app_id="101"
 		local app_name="AI 영상 생성 도구"
-		local app_text="MoneyPrinterTurbo는 AI 대형 모델을 사용하여 고화질 짧은 동영상을 합성하는 도구입니다."
+		local app_text="MoneyPrinterTurbo는 AI 대형 모델을 사용하여 고화질 단편 동영상을 합성하는 도구입니다."
 		local app_url="공식 웹사이트: https://github.com/harry0703/MoneyPrinterTurbo"
 		local docker_name="moneyprinterturbo"
 		local docker_port="8101"
@@ -12925,7 +12925,7 @@ discourse,yunsou,ahhhhfs,nsgame,gying" \
 		local app_id="112"
 		local docker_name="lucky"
 		local docker_img="gdy666/lucky:v2"
-		# Lucky는 호스트 네트워크 모드를 사용하므로 여기서 포트는 기록/설명 참조용으로만 사용되며 실제로는 애플리케이션 자체에 의해 제어됩니다(기본값 16601).
+		# Lucky는 호스트 네트워크 모드를 사용하므로 여기의 포트는 기록/설명 참조용으로만 사용되며 실제로는 애플리케이션 자체에 의해 제어됩니다(기본값 16601).
 		local docker_port=8112
 
 		docker_rum() {
@@ -13099,7 +13099,7 @@ linux_work() {
 	  echo -e "${gl_kjlan}2.   ${gl_bai}작업 영역 2"
 	  echo -e "${gl_kjlan}3.   ${gl_bai}작업 영역 3"
 	  echo -e "${gl_kjlan}4.   ${gl_bai}작업 영역 4"
-	  echo -e "${gl_kjlan}5.   ${gl_bai}작업 공간 5번"
+	  echo -e "${gl_kjlan}5.   ${gl_bai}작업 영역 5"
 	  echo -e "${gl_kjlan}6.   ${gl_bai}작업 영역 6"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}작업 영역 7"
 	  echo -e "${gl_kjlan}8.   ${gl_bai}작업 영역 8"
@@ -13201,7 +13201,7 @@ linux_work() {
 			  echo -e "SSH 상주 모드${tmux_sshd_status}"
 			  echo "SSH 연결을 연 후 바로 상주 모드로 들어가고 이전 작업 상태로 바로 돌아갑니다."
 			  echo "------------------------"
-			  echo "1. 켜기 2. 끄기"
+			  echo "1. 켜짐 2. 꺼짐"
 			  echo "------------------------"
 			  echo "0. 이전 메뉴로 돌아가기"
 			  echo "------------------------"
@@ -13629,8 +13629,8 @@ EOF
 						;;
 					2)
 						rm -f /etc/gai.conf
-						echo "IPv6 우선순위로 전환됨"
-						send_stats "IPv6 우선순위로 전환됨"
+						echo "먼저 IPv6로 전환됨"
+						send_stats "먼저 IPv6로 전환됨"
 						;;
 
 					3)
@@ -14126,7 +14126,7 @@ EOF
 					echo -e "${gl_lv}현재 설정된 인바운드 트래픽 제한 임계값은 다음과 같습니다.${gl_huang}${rx_threshold_gb}${gl_lv}G${gl_bai}"
 					echo -e "${gl_lv}현재 설정된 아웃바운드 트래픽 제한 임계값은 다음과 같습니다.${gl_huang}${tx_threshold_gb}${gl_lv}GB${gl_bai}"
 				else
-					echo -e "${gl_hui}현재 제한 종료 기능이 현재 활성화되어 있지 않습니다.${gl_bai}"
+					echo -e "${gl_hui}현재 제한 종료 기능이 활성화되어 있지 않습니다.${gl_bai}"
 				fi
 
 				echo
@@ -14232,7 +14232,7 @@ EOF
 			  root_use
 			  send_stats "전신 경고"
 			  echo "TG-bot 모니터링 및 조기경보 기능"
-			  echo "영상 소개: https://youtu.be/vLL-eb3Z_TY"
+			  echo "영상소개: https://youtu.be/vLL-eb3Z_TY"
 			  echo "------------------------------------------------"
 			  echo "로컬 CPU, 메모리, 하드 디스크, 트래픽 및 SSH 로그인에 대한 실시간 모니터링 및 경고를 달성하려면 경고를 수신하도록 tg 로봇 API 및 사용자 ID를 구성해야 합니다."
 			  echo "임계값에 도달하면 경고 메시지가 사용자에게 전송됩니다."
@@ -14822,7 +14822,7 @@ while true; do
 	  echo -e "${gl_kjlan}일괄적으로 작업 실행${gl_bai}"
 	  echo -e "${gl_kjlan}11. ${gl_bai}기술 사자 스크립트 설치${gl_kjlan}12. ${gl_bai}시스템 업데이트${gl_kjlan}13. ${gl_bai}시스템 청소"
 	  echo -e "${gl_kjlan}14. ${gl_bai}도커 설치${gl_kjlan}15. ${gl_bai}BBR3 설치${gl_kjlan}16. ${gl_bai}1G 가상 메모리 설정"
-	  echo -e "${gl_kjlan}17. ${gl_bai}시간대를 상하이로 설정${gl_kjlan}18. ${gl_bai}모든 포트 열기${gl_kjlan}51. ${gl_bai}맞춤 지침"
+	  echo -e "${gl_kjlan}17. ${gl_bai}시간대를 상하이로 설정${gl_kjlan}18. ${gl_bai}모든 포트 열기${gl_kjlan}51. ${gl_bai}사용자 정의 지시어"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
 	  echo -e "${gl_kjlan}0.  ${gl_bai}메인 메뉴로 돌아가기"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
@@ -15178,7 +15178,7 @@ done
 
 
 k_info() {
-send_stats "k 명령 참조 예"
+send_stats "k 명령 참조 사용 사례"
 echo "-------------------"
 echo "영상 소개: https://www.bilibili.com/video/BV1ib421E7it?t=0.1"
 echo "다음은 k 명령의 참조 사용 사례입니다."
