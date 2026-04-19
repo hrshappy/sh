@@ -1197,7 +1197,7 @@ iptables_panel() {
 				  ;;
 
 			  17)
-				  read -e -p "지워진 국가 코드를 입력하십시오(여러 국가 코드는 CN US JP와 같이 공백으로 구분될 수 있음)." country_code
+				  read -e -p "삭제된 국가 코드를 입력하십시오(여러 국가 코드는 CN US JP와 같이 공백으로 구분될 수 있음)." country_code
 				  manage_country_rules unblock $country_code
 				  send_stats "명확한 국가$country_codeIP"
 				  ;;
@@ -1259,7 +1259,7 @@ check_swap() {
 
 local swap_total=$(free -m | awk 'NR==3{print $2}')
 
-# 가상 메모리를 만들어야 하는지 확인
+# 가상 메모리를 생성해야 하는지 결정
 [ "$swap_total" -gt 0 ] || add_swap 1024
 
 
@@ -1545,7 +1545,7 @@ certs_status() {
 		echo -e "${gl_hong}알아채다:${gl_bai}인증서 신청이 실패했습니다. 다음 가능한 이유를 확인하고 다시 시도하십시오."
 		echo -e "1. 도메인 이름이 잘못 입력되었습니다. ➠ 도메인 이름이 올바르게 입력되었는지 확인하세요."
 		echo -e "2. DNS 확인 문제 ➠ 도메인 이름이 서버 IP로 올바르게 확인되었는지 확인"
-		echo -e "3. 네트워크 구성 문제 ➠ Cloudflare Warp 등 가상 네트워크를 사용하는 경우 일시적으로 종료하시기 바랍니다"
+		echo -e "3. 네트워크 구성 문제 ➠ Cloudflare Warp 등 가상 네트워크를 사용하는 경우 일시적으로 종료하세요."
 		echo -e "4. 방화벽 제한사항 ➠ 포트 80/443이 열려 있는지 확인하고 접근이 가능한지 확인하세요."
 		echo -e "5. 신청 횟수가 한도를 초과했습니다. ➠ Let's Encrypt에는 주간 한도(5회/도메인 이름/주)가 있습니다."
 		echo -e "6. 국내 등록 제한 ➠ 중국 ​​본토 환경의 경우 도메인 이름 등록 여부를 확인하시기 바랍니다."
@@ -1862,7 +1862,7 @@ check_waf_status() {
 	if grep -q "^\s*#\s*modsecurity on;" /home/web/nginx.conf; then
 		waf_status=""
 	elif grep -q "modsecurity on;" /home/web/nginx.conf; then
-		waf_status="WAF가 켜져 있습니다"
+		waf_status="WAF가 켜져 있습니다."
 	else
 		waf_status=""
 	fi
@@ -2334,7 +2334,7 @@ check_nginx_compression() {
 
 	# zstd가 켜져 있고 주석 처리가 해제되어 있는지 확인하세요. (전체 줄은 zstd on으로 시작됩니다.)
 	if grep -qE '^\s*zstd\s+on;' "$CONFIG_FILE"; then
-		zstd_status="zstd 압축이 활성화되었습니다"
+		zstd_status="zstd 압축이 켜져 있습니다"
 	else
 		zstd_status=""
 	fi
@@ -2579,7 +2579,7 @@ check_docker_image_update() {
 	local hub_info=$(curl -s "https://hub.docker.com/v2/repositories/$image_repo/tags/$image_tag")
 	local last_updated=$(echo "$hub_info" | jq -r '.last_updated' 2>/dev/null)
 
-	# 획득한 시간을 확인하세요.
+	# 획득한 시간을 확인
 	if [[ -n "$last_updated" && "$last_updated" != "null" ]]; then
 		local container_created_ts=$(date -d "$container_created" +%s 2>/dev/null)
 		local last_updated_ts=$(date -d "$last_updated" +%s 2>/dev/null)
@@ -2676,7 +2676,7 @@ clear_container_rules() {
 		iptables -D DOCKER-USER -p tcp -d "$container_ip" -j DROP
 	fi
 
-	# 특정 IP를 허용하는 규칙 지우기
+	# 지정된 IP를 허용하는 규칙을 지웁니다.
 	if iptables -C DOCKER-USER -p tcp -s "$allowed_ip" -d "$container_ip" -j ACCEPT &>/dev/null; then
 		iptables -D DOCKER-USER -p tcp -s "$allowed_ip" -d "$container_ip" -j ACCEPT
 	fi
@@ -2695,7 +2695,7 @@ clear_container_rules() {
 		iptables -D DOCKER-USER -p udp -d "$container_ip" -j DROP
 	fi
 
-	# 특정 IP를 허용하는 규칙 지우기
+	# 지정된 IP를 허용하는 규칙을 지웁니다.
 	if iptables -C DOCKER-USER -p udp -s "$allowed_ip" -d "$container_ip" -j ACCEPT &>/dev/null; then
 		iptables -D DOCKER-USER -p udp -s "$allowed_ip" -d "$container_ip" -j ACCEPT
 	fi
@@ -3328,7 +3328,7 @@ ldnmp_web_on() {
 	  echo "당신의$webname지어졌습니다!"
 	  echo "https://$yuming"
 	  echo "------------------------"
-	  echo "$webname설치정보는 다음과 같습니다."
+	  echo "$webname설치 정보는 다음과 같습니다."
 
 }
 
@@ -3628,7 +3628,7 @@ stream_panel() {
 
 ldnmp_Proxy_backend_stream() {
 	clear
-	webname="스트리밍 4계층 프록시-로드 밸런싱"
+	webname="스트림 4계층 프록시-로드 밸런싱"
 
 	send_stats "설치하다$webname"
 	echo "배포 시작$webname"
@@ -5450,7 +5450,7 @@ elrepo() {
 		  echo "영상 소개: https://www.bilibili.com/video/BV1mH4y1w7qA?t=529.2"
 		  echo "------------------------------------------------"
 		  echo "Red Hat 시리즈 배포판 CentOS/RedHat/Alma/Rocky/oracle만 지원"
-		  echo "Linux 커널을 업그레이드하면 시스템 성능과 보안이 향상될 수 있습니다. 가능하다면 시도해 보시고, 프로덕션 환경을 주의해서 업그레이드하시는 것을 추천드립니다!"
+		  echo "Linux 커널을 업그레이드하면 시스템 성능과 보안이 향상될 수 있습니다. 가능하다면 시도해 보시고, 프로덕션 환경도 주의해서 업그레이드하시는 것을 추천드립니다!"
 		  echo "------------------------------------------------"
 		  read -e -p "계속하시겠습니까? (예/아니요):" choice
 
@@ -5992,7 +5992,7 @@ linux_trash() {
 
 	clear
 	echo -e "현재 휴지통${trash_status}"
-	echo -e "활성화한 후에는 중요한 파일이 실수로 삭제되는 것을 방지하기 위해 rm으로 삭제된 파일이 먼저 휴지통에 저장됩니다!"
+	echo -e "활성화한 후에는 중요한 파일이 실수로 삭제되는 것을 방지하기 위해 rm으로 삭제된 파일이 먼저 휴지통에 들어갑니다!"
 	echo "------------------------------------------------"
 	ls -l --color=auto "$TRASH_DIR" 2>/dev/null || echo "휴지통이 비어 있습니다."
 	echo "------------------------"
@@ -6231,7 +6231,7 @@ add_connection() {
 			echo "주요 내용을 붙여넣으세요(붙인 후 Enter를 두 번 누르세요)."
 			local password_or_key=""
 			while IFS= read -r line; do
-				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함되어 있으면 입력을 종료합니다.
+				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함된 경우 입력을 종료합니다.
 				if [[ -z "$line" && "$password_or_key" == *"-----BEGIN"* ]]; then
 					break
 				fi
@@ -6513,7 +6513,7 @@ disk_manager() {
 	send_stats "하드디스크 관리 기능"
 	while true; do
 		clear
-		echo "하드 드라이브 파티션 관리"
+		echo "하드 디스크 파티션 관리"
 		echo -e "${gl_huang}이 기능은 내부 테스트 중이므로 프로덕션 환경에서는 사용하면 안 됩니다.${gl_bai}"
 		echo "------------------------"
 		list_partitions
@@ -6579,7 +6579,7 @@ add_task() {
 			echo "주요 내용을 붙여넣으세요(붙인 후 Enter를 두 번 누르세요)."
 			local password_or_key=""
 			while IFS= read -r line; do
-				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함되어 있으면 입력을 종료합니다.
+				# 입력이 빈 줄이고 키 내용에 이미 시작 부분이 포함된 경우 입력을 종료합니다.
 				if [[ -z "$line" && "$password_or_key" == *"-----BEGIN"* ]]; then
 					break
 				fi
@@ -7269,7 +7269,7 @@ docker_ssh_migration() {
 
 		echo -e "${YELLOW}Docker 컨테이너 백업 중...${NC}"
 		docker ps --format '{{.Names}}'
-		read -e -p  "백업할 컨테이너의 이름을 입력하십시오(실행 중인 모든 컨테이너를 백업하려면 여러 개의 공백을 구분하고 Enter 키를 누르십시오)." containers
+		read -e -p  "백업할 컨테이너의 이름을 입력하십시오(여러 개의 공백을 구분하고 Enter를 눌러 실행 중인 모든 컨테이너를 백업하십시오)." containers
 
 		install tar jq gzip
 		install_docker
@@ -7408,7 +7408,7 @@ docker_ssh_migration() {
 
 				mkdir -p "$original_path"
 				tar -xzf "$BACKUP_DIR/compose_project_${project_name}.tar.gz" -C "$original_path"
-				echo -e "${GREEN}프로젝트 작성 [$project_name]는 다음 위치로 추출되었습니다.$original_path${NC}"
+				echo -e "${GREEN}프로젝트 작성 [$project_name]가 다음 위치로 추출되었습니다.$original_path${NC}"
 
 				cd "$original_path" || return
 				docker compose down || true
@@ -7424,7 +7424,7 @@ docker_ssh_migration() {
 			[[ ! -f "$json" ]] && continue
 			has_container=true
 			container=$(basename "$json" | sed 's/_inspect.json//')
-			echo -e "${GREEN}처리 용기:$container${NC}"
+			echo -e "${GREEN}처리용기:$container${NC}"
 
 			# 컨테이너가 이미 존재하고 실행 중인지 확인하세요.
 			if docker ps --format '{{.Names}}' | grep -q "^${container}$"; then
@@ -7498,7 +7498,7 @@ docker_ssh_migration() {
 	migrate_docker() {
 		send_stats "도커 마이그레이션"
 		install jq
-		read -e -p  "마이그레이션할 백업 디렉터리를 입력하세요." BACKUP_DIR
+		read -e -p  "마이그레이션할 백업 디렉터리를 입력하십시오:" BACKUP_DIR
 		[[ ! -d "$BACKUP_DIR" ]] && { echo -e "${RED}백업 디렉터리가 존재하지 않습니다.${NC}"; return; }
 
 		read -e -p  "대상 서버 IP:" TARGET_IP
@@ -7543,7 +7543,7 @@ docker_ssh_migration() {
 			echo -e "1. 도커 프로젝트 백업"
 			echo -e "2. 도커 프로젝트 마이그레이션"
 			echo -e "3. 도커 프로젝트 복원"
-			echo -e "4. Docker 프로젝트의 백업 파일을 삭제합니다."
+			echo -e "4. docker 프로젝트 백업 파일 삭제"
 			echo "------------------------"
 			echo -e "0. 이전 메뉴로 돌아가기"
 			echo "------------------------"
@@ -8058,7 +8058,7 @@ linux_Oracle() {
 		  1)
 			  clear
 			  echo "활성 스크립트: CPU 사용량 10-20% 메모리 사용량 20%"
-			  read -e -p "설치하시겠습니까? (예/아니요):" choice
+			  read -e -p "정말로 설치하시겠습니까? (예/아니요):" choice
 			  case "$choice" in
 				[Yy])
 
@@ -9269,7 +9269,7 @@ while true; do
 
 	  echo -e "${gl_kjlan}1.   ${color1}파고다 패널 공식 버전${gl_kjlan}2.   ${color2}aaPanel Pagoda 국제 버전"
 	  echo -e "${gl_kjlan}3.   ${color3}1패널 차세대 관리 패널${gl_kjlan}4.   ${color4}NginxProxyManager 시각화 패널"
-	  echo -e "${gl_kjlan}5.   ${color5}OpenList 다중 저장소 파일 목록 프로그램${gl_kjlan}6.   ${color6}Ubuntu 원격 데스크톱 웹 버전"
+	  echo -e "${gl_kjlan}5.   ${color5}OpenList 다중 저장소 파일 목록 프로그램${gl_kjlan}6.   ${color6}Ubuntu 원격 데스크톱 웹 에디션"
 	  echo -e "${gl_kjlan}7.   ${color7}나타 프로브 VPS 모니터링 패널${gl_kjlan}8.   ${color8}QB 오프라인 BT 자기 다운로드 패널"
 	  echo -e "${gl_kjlan}9.   ${color9}Poste.io 메일 서버 프로그램${gl_kjlan}10.  ${color10}RocketChat 다자간 온라인 채팅 시스템"
 	  echo -e "${gl_kjlan}-------------------------"
@@ -9329,7 +9329,7 @@ while true; do
 	  echo -e "${gl_kjlan}-------------------------"
 	  echo -e "${gl_kjlan}101. ${color101}AI 영상 생성 도구${gl_kjlan}102. ${color102}VoceChat 다자간 온라인 채팅 시스템"
 	  echo -e "${gl_kjlan}103. ${color103}Umami 웹사이트 통계 도구${gl_kjlan}104. ${color104}스트림 4계층 프록시 전달 도구"
-	  echo -e "${gl_kjlan}105. ${color105}쓰위안 노트${gl_kjlan}106. ${color106}Drawnix 오픈 소스 화이트보드 도구"
+	  echo -e "${gl_kjlan}105. ${color105}쓰위안 노트${gl_kjlan}106. ${color106}Drawix 오픈 소스 화이트보드 도구"
 	  echo -e "${gl_kjlan}107. ${color107}PanSou 네트워크 디스크 검색${gl_kjlan}108. ${color108}LangBot 챗봇"
 	  echo -e "${gl_kjlan}109. ${color109}ZFile 온라인 네트워크 디스크${gl_kjlan}110. ${color110}Karakeep 북마크 관리"
 	  echo -e "${gl_kjlan}-------------------------"
@@ -9525,7 +9525,7 @@ while true; do
 		}
 
 
-		local docker_describe="webtop은 Ubuntu 기반 컨테이너입니다. 해당 IP에 접속할 수 없는 경우, 접속할 도메인 이름을 추가해 주세요."
+		local docker_describe="webtop은 Ubuntu 기반 컨테이너입니다. 해당 IP에 접근할 수 없는 경우, 접근할 도메인 이름을 추가해주세요."
 		local docker_url="공식 홈페이지 소개: https://docs.linuxserver.io/images/docker-webtop/"
 		local docker_use=""
 		local docker_passwd=""
@@ -9545,7 +9545,7 @@ while true; do
 			check_docker_app
 			check_docker_image_update $docker_name
 			clear
-			echo -e "네자 모니터링$check_docker $update_status"
+			echo -e "나타 모니터링$check_docker $update_status"
 			echo "오픈 소스, 가볍고 사용하기 쉬운 서버 모니터링 및 운영 및 유지 관리 도구"
 			echo "공식 웹사이트 구축 문서: https://nezha.wiki/guide/dashboard.html"
 			if docker ps -a --format '{{.Names}}' 2>/dev/null | grep -q "$docker_name"; then
@@ -9625,7 +9625,7 @@ while true; do
 			check_docker_image_update $docker_name
 
 			clear
-			echo -e "우편 서비스$check_docker $update_status"
+			echo -e "우정$check_docker $update_status"
 			echo "poste.io는 오픈 소스 메일 서버 솔루션입니다."
 			echo "영상 소개: https://www.bilibili.com/video/BV1wv421C71t?t=0.1"
 
@@ -10225,7 +10225,7 @@ while true; do
 		}
 
 
-		local docker_describe="웹탑은 중국어 버전의 Alpine 컨테이너를 기반으로 합니다. 해당 IP에 접속할 수 없는 경우, 접속할 도메인 이름을 추가해 주세요."
+		local docker_describe="웹탑은 중국어 버전의 Alpine 컨테이너를 기반으로 합니다. 해당 IP에 접근할 수 없는 경우, 접근할 도메인 이름을 추가해주세요."
 		local docker_url="공식 홈페이지 소개: https://docs.linuxserver.io/images/docker-webtop/"
 		local docker_use=""
 		local docker_passwd=""
@@ -10364,7 +10364,7 @@ while true; do
 
 
 		local docker_describe="포토프리즘은 매우 강력한 개인 사진 앨범 시스템입니다."
-		local docker_url="공식 홈페이지 소개 : https://www.photoprism.app/"
+		local docker_url="공식 홈페이지 소개: https://www.photoprism.app/"
 		local docker_use="echo \"계정: admin 비밀번호:$rootpasswd\""
 		local docker_passwd=""
 		local app_size="1"
@@ -11056,7 +11056,7 @@ while true; do
 
 		local app_id="60"
 		local app_name="JumpServer 오픈 소스 요새 머신"
-		local app_text="오픈소스 권한 있는 액세스 관리(PAM) 도구입니다. 이 프로그램은 포트 80을 사용하며 액세스를 위한 도메인 이름 추가를 지원하지 않습니다."
+		local app_text="오픈소스 PAM(Privileged Access Management) 도구입니다. 이 프로그램은 포트 80을 사용하며 액세스를 위한 도메인 이름 추가를 지원하지 않습니다."
 		local app_url="공식 소개: https://github.com/jumpserver/jumpserver"
 		local docker_name="jms_web"
 		local docker_port="80"
@@ -11637,7 +11637,7 @@ while true; do
 
 		  local app_id="80"
 		  local app_name="링크워든 북마크 관리"
-		  local app_text="태그 지정, 검색 및 팀 협업을 지원하는 오픈 소스, 자체 호스팅 북마크 관리 플랫폼입니다."
+		  local app_text="태그 지정, 검색 및 팀 협업을 지원하는 오픈 소스 자체 호스팅 북마크 관리 플랫폼입니다."
 		  local app_url="공식 홈페이지: https://linkwarden.app/"
 		  local docker_name="linkwarden-linkwarden-1"
 		  local docker_port="8080"
@@ -12005,7 +12005,7 @@ while true; do
 
 		}
 
-		local docker_describe="익명의 비밀번호로 텍스트와 파일을 공유하고, 빠른 배송과 같은 파일 픽업"
+		local docker_describe="익명의 비밀번호로 텍스트와 파일을 공유하고 빠른 배송과 같은 파일 픽업"
 		local docker_url="공식 홈페이지 소개: https://github.com/vastsa/FileCodeBox"
 		local docker_use="echo \"접속 주소 뒤에는 /#/admin이 붙어서 관리자 페이지에 접속합니다\""
 		local docker_passwd="echo \"관리자 비밀번호: FileCodeBox2023\""
@@ -12078,7 +12078,7 @@ while true; do
 
 		local app_name="gitea 비공개 코드 저장소"
 		local app_text="GitHub에 가까운 경험을 제공하는 무료 차세대 코드 호스팅 플랫폼입니다."
-		local app_url="영상소개 : https://github.com/go-gitea/gitea"
+		local app_url="영상 소개: https://github.com/go-gitea/gitea"
 		local docker_name="gitea"
 		local docker_port="8091"
 		local app_size="2"
@@ -12577,7 +12577,7 @@ while true; do
 	  101|moneyprinterturbo)
 		local app_id="101"
 		local app_name="AI 영상 생성 도구"
-		local app_text="MoneyPrinterTurbo는 AI 대형 모델을 사용하여 고화질 단편 동영상을 합성하는 도구입니다."
+		local app_text="MoneyPrinterTurbo는 AI 대형 모델을 사용하여 고화질 짧은 동영상을 합성하는 도구입니다."
 		local app_url="공식 웹사이트: https://github.com/harry0703/MoneyPrinterTurbo"
 		local docker_name="moneyprinterturbo"
 		local docker_port="8101"
@@ -12925,7 +12925,7 @@ discourse,yunsou,ahhhhfs,nsgame,gying" \
 		local app_id="112"
 		local docker_name="lucky"
 		local docker_img="gdy666/lucky:v2"
-		# Lucky는 호스트 네트워크 모드를 사용하므로 여기의 포트는 기록/설명 참조용으로만 사용되며 실제로는 애플리케이션 자체에 의해 제어됩니다(기본값 16601).
+		# Lucky는 호스트 네트워크 모드를 사용하므로 여기서 포트는 기록/설명 참조용으로만 사용되며 실제로는 애플리케이션 자체에 의해 제어됩니다(기본값 16601).
 		local docker_port=8112
 
 		docker_rum() {
@@ -13027,7 +13027,7 @@ discourse,yunsou,ahhhhfs,nsgame,gying" \
 	  r)
 	  	root_use
 	  	send_stats "모든 앱 복원"
-	  	echo "사용 가능한 애플리케이션 백업"
+	  	echo "사용 가능한 앱 백업"
 	  	echo "-------------------------"
 	  	ls -lt /app*.gz | awk '{print $NF}'
 	  	echo ""
@@ -13099,7 +13099,7 @@ linux_work() {
 	  echo -e "${gl_kjlan}2.   ${gl_bai}작업 영역 2"
 	  echo -e "${gl_kjlan}3.   ${gl_bai}작업 영역 3"
 	  echo -e "${gl_kjlan}4.   ${gl_bai}작업 영역 4"
-	  echo -e "${gl_kjlan}5.   ${gl_bai}작업 영역 5"
+	  echo -e "${gl_kjlan}5.   ${gl_bai}작업 공간 5번"
 	  echo -e "${gl_kjlan}6.   ${gl_bai}작업 영역 6"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}작업 영역 7"
 	  echo -e "${gl_kjlan}8.   ${gl_bai}작업 영역 8"
@@ -13201,7 +13201,7 @@ linux_work() {
 			  echo -e "SSH 상주 모드${tmux_sshd_status}"
 			  echo "SSH 연결을 연 후 바로 상주 모드로 들어가고 이전 작업 상태로 바로 돌아갑니다."
 			  echo "------------------------"
-			  echo "1. 켜짐 2. 꺼짐"
+			  echo "1. 켜기 2. 끄기"
 			  echo "------------------------"
 			  echo "0. 이전 메뉴로 돌아가기"
 			  echo "------------------------"
@@ -13386,7 +13386,7 @@ linux_Settings() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}21.  ${gl_bai}기본 호스트 확인${gl_kjlan}22.  ${gl_bai}SSH 방어 프로그램"
 	  echo -e "${gl_kjlan}23.  ${gl_bai}전류 제한 자동 종료${gl_kjlan}24.  ${gl_bai}ROOT 개인 키 로그인 모드"
-	  echo -e "${gl_kjlan}25.  ${gl_bai}TG-bot 시스템 모니터링 및 조기 경보${gl_kjlan}26.  ${gl_bai}OpenSSH 고위험 취약점 수정"
+	  echo -e "${gl_kjlan}25.  ${gl_bai}TG-bot 시스템 모니터링 및 조기경보${gl_kjlan}26.  ${gl_bai}OpenSSH 고위험 취약점 수정"
 	  echo -e "${gl_kjlan}27.  ${gl_bai}Red Hat Linux 커널 업그레이드${gl_kjlan}28.  ${gl_bai}Linux 시스템 커널 매개변수 최적화${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}29.  ${gl_bai}바이러스 검사 도구${gl_huang}★${gl_bai}                     ${gl_kjlan}30.  ${gl_bai}파일 관리자"
 	  echo -e "${gl_kjlan}------------------------"
@@ -13673,7 +13673,7 @@ EOF
 
 				case "$choice" in
 				  1)
-					send_stats "1G 가상 메모리가 설정되었습니다"
+					send_stats "1G 가상 메모리가 설정되었습니다."
 					add_swap 1024
 
 					;;
@@ -14142,7 +14142,7 @@ EOF
 				case "$Limiting" in
 				  1)
 					# 새 가상 메모리 크기 입력
-					echo "실제 서버의 트래픽이 100G만 있는 경우 임계값을 95G로 설정하고 미리 종료하여 트래픽 오류나 오버플로를 방지할 수 있습니다."
+					echo "실제 서버에 트래픽이 100G만 있는 경우 임계값을 95G로 설정하고 미리 종료하여 트래픽 오류나 오버플로를 방지할 수 있습니다."
 					read -e -p "인바운드 트래픽 임계값을 입력하십시오(단위는 G, 기본값은 100G)." rx_threshold_gb
 					rx_threshold_gb=${rx_threshold_gb:-100}
 					read -e -p "아웃바운드 트래픽 임계값을 입력하십시오(단위는 G, 기본값은 100G)." tx_threshold_gb
@@ -14788,7 +14788,7 @@ run_commands_on_servers() {
 		local username=${SERVER_ARRAY[i+3]}
 		local password=${SERVER_ARRAY[i+4]}
 		echo
-		echo -e "${gl_huang}연결 대상$name ($hostname)...${gl_bai}"
+		echo -e "${gl_huang}연결하다$name ($hostname)...${gl_bai}"
 		# sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username@$hostname" -p "$port" "$1"
 		sshpass -p "$password" ssh -t -o StrictHostKeyChecking=no "$username@$hostname" -p "$port" "$1"
 	done
@@ -14822,7 +14822,7 @@ while true; do
 	  echo -e "${gl_kjlan}일괄적으로 작업 실행${gl_bai}"
 	  echo -e "${gl_kjlan}11. ${gl_bai}기술 사자 스크립트 설치${gl_kjlan}12. ${gl_bai}시스템 업데이트${gl_kjlan}13. ${gl_bai}시스템 청소"
 	  echo -e "${gl_kjlan}14. ${gl_bai}도커 설치${gl_kjlan}15. ${gl_bai}BBR3 설치${gl_kjlan}16. ${gl_bai}1G 가상 메모리 설정"
-	  echo -e "${gl_kjlan}17. ${gl_bai}시간대를 상하이로 설정${gl_kjlan}18. ${gl_bai}모든 포트 열기${gl_kjlan}51. ${gl_bai}사용자 정의 지시어"
+	  echo -e "${gl_kjlan}17. ${gl_bai}시간대를 상하이로 설정${gl_kjlan}18. ${gl_bai}모든 포트 열기${gl_kjlan}51. ${gl_bai}맞춤 지침"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
 	  echo -e "${gl_kjlan}0.  ${gl_bai}메인 메뉴로 돌아가기"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
@@ -14863,7 +14863,7 @@ while true; do
 		  5)
 			  clear
 			  send_stats "클러스터 복원"
-			  echo "server.py를 업로드하고 아무 키나 눌러 업로드를 시작하세요!"
+			  echo "귀하의 server.py를 업로드하고 업로드를 시작하려면 아무 키나 누르십시오!"
 			  echo -e "업로드해주세요${gl_huang}servers.py${gl_bai}파일을 제출하다${gl_huang}/root/cluster/${gl_bai}복원 완료!"
 			  break_end
 			  ;;
@@ -15222,7 +15222,7 @@ echo "k 포트 닫기 gbdk 7800 |k 포트 7800 닫기"
 echo "릴리스 IP k fxip 127.0.0.0/8 |k 릴리스 IP 127.0.0.0/8"
 echo "IP 차단 k zzip 177.5.25.36 |k IP 177.5.25.36 차단"
 echo "명령 즐겨찾기 k 즐겨찾기 | k 명령 즐겨찾기"
-echo "애플리케이션 시장 관리 k app"
+echo "애플리케이션 시장관리 kapp"
 echo "신청번호의 빠른 관리 k app 26 | k 앱 1패널 | k 앱 npm"
 echo "Fail2ban 관리 k Fail2ban | 케이 F2B"
 echo "시스템 정보 표시 k 정보"
