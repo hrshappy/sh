@@ -1218,7 +1218,7 @@ iptables_panel() {
 add_swap() {
 	local new_swap=$1  # 获取传入的参数
 
-	# 取得目前系統中所有的 swap 分區
+	# 取得目前系統中所有的 swap 分割區
 	local swap_partitions=$(grep -E '^/dev/' /proc/swaps | awk '{print $1}')
 
 	# 遍歷並刪除所有的 swap 分割區
@@ -3793,7 +3793,7 @@ ldnmp_web_status() {
 			2)
 				send_stats "克隆站點域名"
 				read -e -p "請輸入舊網域名稱:" oddyuming
-				read -e -p "請輸入新網域名稱:" yuming
+				read -e -p "請輸入新網域:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -3834,7 +3834,7 @@ ldnmp_web_status() {
 				send_stats "建立關聯站點"
 				echo -e "為現有的站點再關聯一個新網域用於訪問"
 				read -e -p "請輸入現有的網域名稱:" oddyuming
-				read -e -p "請輸入新網域名稱:" yuming
+				read -e -p "請輸入新網域:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -11504,7 +11504,7 @@ while true; do
 		}
 
 		local docker_describe="你的音樂精靈，旨在幫助你更好地管理音樂。"
-		local docker_url="官网介绍: https://github.com/foamzou/melody"
+		local docker_url="官網介紹: https://github.com/foamzou/melody"
 		local docker_use=""
 		local docker_passwd=""
 		local app_size="1"
@@ -11531,7 +11531,7 @@ while true; do
 		}
 
 		local docker_describe="是一個中文DOS遊戲收藏網站"
-		local docker_url="官网介绍: https://github.com/rwv/chinese-dos-games"
+		local docker_url="官網介紹: https://github.com/rwv/chinese-dos-games"
 		local docker_use=""
 		local docker_passwd=""
 		local app_size="2"
@@ -12078,7 +12078,7 @@ while true; do
 
 		local app_name="gitea私有程式碼倉庫"
 		local app_text="免費新一代的程式碼託管平台，提供接近 GitHub 的使用體驗。"
-		local app_url="视频介绍: https://github.com/go-gitea/gitea"
+		local app_url="影片介紹: https://github.com/go-gitea/gitea"
 		local docker_name="gitea"
 		local docker_port="8091"
 		local app_size="2"
@@ -12565,7 +12565,7 @@ while true; do
 		}
 
 		local docker_describe="開源的點對點檔案同步工具，類似 Dropbox、Resilio Sync，但完全去中心化。"
-		local docker_url="官网介绍: https://github.com/syncthing/syncthing"
+		local docker_url="官網介紹: https://github.com/syncthing/syncthing"
 		local docker_use=""
 		local docker_passwd=""
 		local app_size="1"
@@ -12632,7 +12632,7 @@ while true; do
 		}
 
 		local docker_describe="是一款支援獨立部署的個人雲端社群媒體聊天服務"
-		local docker_url="官网介绍: https://github.com/Privoce/vocechat-web"
+		local docker_url="官網介紹: https://github.com/Privoce/vocechat-web"
 		local docker_use=""
 		local docker_passwd=""
 		local app_size="1"
@@ -12943,7 +12943,7 @@ discourse,yunsou,ahhhhfs,nsgame,gying" \
 		}
 
 		local docker_describe="Lucky 是一個大內部網路穿透及連接埠轉送管理工具，支援 DDNS、反向代理、WOL 等功能。"
-		local docker_url="项目地址: https://github.com/gdy666/lucky"
+		local docker_url="專案地址: https://github.com/gdy666/lucky"
 		local docker_use="echo \"預設帳號密碼: 666\""
 		local docker_passwd=""
 		local app_size="1"
@@ -14234,7 +14234,7 @@ EOF
 			  echo "TG-bot監控預警功能"
 			  echo "影片介紹: https://youtu.be/vLL-eb3Z_TY"
 			  echo "------------------------------------------------"
-			  echo "您需要設定tg機器人API和接收預警的使用者ID，即可實現本機CPU，內存，硬碟，流量，SSH登入的即時監控預警"
+			  echo "您需要設定tg機器人API和接收預警的用戶ID，即可實現本機CPU，內存，硬碟，流量，SSH登入的即時監控預警"
 			  echo "到達閾值後會向用戶發送預警訊息"
 			  echo -e "${gl_hui}-關於流量，重啟伺服器將重新計算-${gl_bai}"
 			  read -e -p "確定繼續嗎？ (Y/N):" choice
@@ -15072,7 +15072,7 @@ while true; do
 			CheckFirstRun_true
 			yinsiyuanquan2
 			cp -f ~/kejilion.sh /usr/local/bin/k > /dev/null 2>&1
-			echo -e "${gl_lv}腳本已更新到最新版本！${gl_huang}v$sh_v_new${gl_bai}"
+			echo -e "${gl_lv}腳本已更新至最新版本！${gl_huang}v$sh_v_new${gl_bai}"
 			send_stats "腳本已經最新$sh_v_new"
 			break_end
 			~/kejilion.sh
