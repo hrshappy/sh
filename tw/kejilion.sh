@@ -276,7 +276,7 @@ remove() {
 }
 
 
-# 通用 systemctl 函数，适用于各种发行版
+# 通用 systemctl 函數，適用於各種發行版
 systemctl() {
 	local COMMAND="$1"
 	local SERVICE_NAME="$2"
@@ -295,7 +295,7 @@ restart() {
 	if [ $? -eq 0 ]; then
 		echo "$1服務已重啟。"
 	else
-		echo "错误：重启 $1服務失敗。"
+		echo "錯誤：重啟$1服務失敗。"
 	fi
 }
 
@@ -1094,7 +1094,7 @@ iptables_panel() {
 		  echo "------------------------"
 		  echo "11. 允許PING 12. 禁止PING"
 		  echo "------------------------"
-		  echo "13. 启动DDOS防御                 14. 关闭DDOS防御"
+		  echo "13. 啟動DDOS防禦 14. 關閉DDOS防禦"
 		  echo "------------------------"
 		  echo "15. 阻止指定國家IP 16. 僅允許指定國家IP"
 		  echo "17. 解除指定國家IP限制"
@@ -1811,7 +1811,7 @@ web_del() {
 		rm /home/web/certs/${yuming}_key.pem > /dev/null 2>&1
 		rm /home/web/certs/${yuming}_cert.pem > /dev/null 2>&1
 
-		# 将域名转换为数据库名
+		# 將網域名稱轉換為資料庫名
 		dbname=$(echo "$yuming" | sed -e 's/[^A-Za-z0-9]/_/g')
 		dbrootpasswd=$(grep -oP 'MYSQL_ROOT_PASSWORD:\s*\K.*' /home/web/docker-compose.yml | tr -d '[:space:]')
 
@@ -3556,7 +3556,7 @@ stream_panel() {
 		clear
 		check_docker_app
 		check_docker_image_update $docker_name
-		echo -e "Stream四层代理转发工具 $check_docker $update_status"
+		echo -e "Stream四層代理轉送工具$check_docker $update_status"
 		echo "NGINX Stream 是 NGINX 的 TCP/UDP 代理模組，用於實現高效能的 傳輸層流量轉送和負載平衡。"
 		echo "------------------------"
 		if [ -d "/home/web/stream.d" ]; then
@@ -3793,7 +3793,7 @@ ldnmp_web_status() {
 			2)
 				send_stats "克隆站點域名"
 				read -e -p "請輸入舊網域名稱:" oddyuming
-				read -e -p "請輸入新網域:" yuming
+				read -e -p "請輸入新網域名稱:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -3834,7 +3834,7 @@ ldnmp_web_status() {
 				send_stats "建立關聯站點"
 				echo -e "為現有的站點再關聯一個新網域用於訪問"
 				read -e -p "請輸入現有的網域名稱:" oddyuming
-				read -e -p "請輸入新網域:" yuming
+				read -e -p "請輸入新網域名稱:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -4496,7 +4496,7 @@ yt_menu_pro() {
 				send_stats "大量影片下載"
 				install nano
 				if [ ! -f "$URL_FILE" ]; then
-				  echo -e "# 输入多个视频链接地址\n# https://www.bilibili.com/bangumi/play/ep733316?spm_id_from=333.337.0.0&from_spmid=666.25.episode.0" > "$URL_FILE"
+				  echo -e "# 輸入多個視訊連結位址\n# https://www.bilibili.com/bangumi/play/ep733316?spm_id_from=333.337.0.0&from_spmid=666.25.episode.0" > "$URL_FILE"
 				fi
 				nano $URL_FILE
 				echo "現在開始批量下載..."
@@ -5403,7 +5403,7 @@ elrepo_install() {
 
 elrepo() {
 		  root_use
-		  send_stats "红帽内核管理"
+		  send_stats "紅帽內核管理"
 		  if uname -r | grep -q 'elrepo'; then
 			while true; do
 				  clear
@@ -6664,7 +6664,7 @@ run_task() {
 		num="$1"
 	fi
 
-	# 如果没有传入任务编号，提示用户输入
+	# 如果沒有傳入任務編號，提示使用者輸入
 	if [[ -z "$num" ]]; then
 		read -e -p "請輸入要執行的任務編號:" num
 	fi
@@ -9449,7 +9449,7 @@ while true; do
 
 		}
 
-		local docker_describe="一个Nginx反向代理工具面板，不支持添加域名访问。"
+		local docker_describe="一個Nginx反向代理工具面板，不支援新增網域存取。"
 		local docker_url="官網介紹: https://nginxproxymanager.com/"
 		local docker_use="echo \"初始使用者名稱: admin@example.com\""
 		local docker_passwd="echo \"初始密碼: changeme\""
@@ -9605,7 +9605,7 @@ while true; do
 
 		}
 
-		local docker_describe="qbittorrent离线BT磁力下载服务"
+		local docker_describe="qbittorrent離線BT磁力下載服務"
 		local docker_url="官網介紹: https://hub.docker.com/r/linuxserver/qbittorrent"
 		local docker_use="sleep 3"
 		local docker_passwd="docker logs qbittorrent"
@@ -10737,7 +10737,7 @@ while true; do
 		local app_id="47"
 		local app_name="普羅米修斯監控"
 		local app_text="Prometheus+Grafana企業級監控系統"
-		local app_url="官网介绍: https://prometheus.io"
+		local app_url="官網介紹: https://prometheus.io"
 		local docker_name="grafana"
 		local docker_port="8047"
 		local app_size="2"
@@ -10748,7 +10748,7 @@ while true; do
 			ip_address
 			echo "已經安裝完成"
 			check_docker_app_ip
-			echo "初始使用者名稱密碼皆為: admin"
+			echo "初始使用者名稱密碼均為: admin"
 		}
 
 		docker_app_update() {
@@ -12576,7 +12576,7 @@ while true; do
 
 	  101|moneyprinterturbo)
 		local app_id="101"
-		local app_name="AI影片生成工具"
+		local app_name="AI影片產生工具"
 		local app_text="MoneyPrinterTurbo是一款使用AI大模型合成高清短影片的工具"
 		local app_url="官方網站: https://github.com/harry0703/MoneyPrinterTurbo"
 		local docker_name="moneyprinterturbo"
@@ -13552,7 +13552,7 @@ EOF
 						send_stats "SSH連接埠已修改"
 						new_ssh_port
 					elif [[ $new_port -eq 0 ]]; then
-						send_stats "退出SSH連接埠修改"
+						send_stats "退出SSH埠修改"
 						break
 					else
 						echo "連接埠號碼無效，請輸入1到65535之間的數字。"
@@ -14647,7 +14647,7 @@ linux_file() {
 				send_stats "壓縮檔案/目錄"
 				;;
 			22) # 解压文件/目录
-				read -e -p "請輸入要解壓縮的檔名 (.tar.gz):" filename
+				read -e -p "請輸入要解壓縮的檔案名稱 (.tar.gz):" filename
 				install tar
 				tar -xzvf "$filename" && echo "已解壓縮$filename" || echo "解壓縮失敗"
 				send_stats "解壓縮檔案/目錄"
@@ -15072,7 +15072,7 @@ while true; do
 			CheckFirstRun_true
 			yinsiyuanquan2
 			cp -f ~/kejilion.sh /usr/local/bin/k > /dev/null 2>&1
-			echo -e "${gl_lv}腳本已更新至最新版本！${gl_huang}v$sh_v_new${gl_bai}"
+			echo -e "${gl_lv}腳本已更新到最新版本！${gl_huang}v$sh_v_new${gl_bai}"
 			send_stats "腳本已經最新$sh_v_new"
 			break_end
 			~/kejilion.sh
